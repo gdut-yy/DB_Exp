@@ -1,0 +1,7 @@
+CREATE TABLE student(
+	Sno CHAR(9) PRIMARY KEY,
+	Sname CHAR(20) UNIQUE,
+	Ssex CHAR(2),
+	Sage SMALLINT,
+	Sdept CHAR(20)
+);
