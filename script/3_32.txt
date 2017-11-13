@@ -1,0 +1,3 @@
+SELECT Sname,Sno
+FROM Student
+WHERE Sname LIKE '_阳%';

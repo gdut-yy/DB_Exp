@@ -1,0 +1,51 @@
+# 学生-课程数据库 脚本
+# 书本的例程中逻辑有误：加了外键约束后，表不能插入数据，此处调整一下顺序。即插入数据后再增加外键约束。
+
+# Student表
+CREATE TABLE student(
+	Sno CHAR(9) PRIMARY KEY,
+	Sname CHAR(20) UNIQUE,
+	Ssex CHAR(2),
+	Sage SMALLINT,
+	Sdept CHAR(20)
+);
+
+INSERT INTO student VALUES ('201215121', '李勇', '男', 20, 'CS');
+INSERT INTO student VALUES ('201215122', '刘晨', '女', 19, 'CS');
+INSERT INTO student VALUES ('201215123', '王敏', '女', 18, 'MA');
+INSERT INTO student VALUES ('201215125', '张立', '男', 19, 'IS');
+
+# Course表
+CREATE TABLE course(
+	Cno CHAR(4) PRIMARY KEY,
+	Cname CHAR(40) NOT NULL,
+	Cpno CHAR(4),
+	Ccredit SMALLINT
+);
+
+INSERT INTO course VALUES ('1', '数据库', '5', 4);
+INSERT INTO course VALUES ('2', '数学', NULL, 2);
+INSERT INTO course VALUES ('3', '信息系统', '1', 4); 
+INSERT INTO course VALUES ('4', '操作系统', '6', 3); 
+INSERT INTO course VALUES ('5', '数据结构', '7', 4);
+INSERT INTO course VALUES ('6', '数据处理', NULL, 2);
+INSERT INTO course VALUES ('7', 'PASCAL语言', '6', 4);
+
+ALTER TABLE course ADD FOREIGN KEY(Cpno) REFERENCES Course(Cno);
+
+# SC表
+CREATE TABLE SC(
+	Sno CHAR(9),
+	Cno CHAR(4),
+	Grade SMALLINT,
+	PRIMARY KEY(Sno,Cno)
+);
+
+INSERT INTO SC VALUES ('201215121', '1', 92);
+INSERT INTO SC VALUES ('201215121', '2', 85);
+INSERT INTO SC VALUES ('201215121', '3', 88);
+INSERT INTO SC VALUES ('201215122', '2', 90);
+INSERT INTO SC VALUES ('201215122', '3', 80);
+
+ALTER TABLE SC ADD FOREIGN KEY(Sno) REFERENCES Student(Sno);
+ALTER TABLE SC ADD	FOREIGN KEY(Cno) REFERENCES Course(Cno);

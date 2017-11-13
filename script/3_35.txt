@@ -1,0 +1,3 @@
+SELECT *
+FROM Course
+WHERE Cname LIKE 'DB\_%i__' ESCAPE '\\';

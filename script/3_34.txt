@@ -1,0 +1,3 @@
+SELECT Cno,Ccredit
+FROM Course
+WHERE Cname LIKE 'DB\_Design' ESCAPE '\';

@@ -1,0 +1,3 @@
+SELECT Sname
+FROM Student
+WHERE Sname LIKE '欧阳_';
