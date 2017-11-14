@@ -1,0 +1,6 @@
+SELECT Sname,Sage
+FROM Student
+WHERE Sage<ANY(SELECT Sage
+				FROM Student
+				WHERE Sdept='CS')
+AND Sdept<>'CS';

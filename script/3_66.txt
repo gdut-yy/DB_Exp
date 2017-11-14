@@ -1,0 +1,7 @@
+SELECT *
+FROM Student
+WHERE Sdept='CS'
+INTERSECT
+SELECT *
+FROM Student
+WHERE Sage<=19;
