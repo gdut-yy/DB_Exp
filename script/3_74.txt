@@ -1,0 +1,6 @@
+select * from student;
+
+UPDATE Student
+SET Sage=Sage+1;
+
+select * from student;

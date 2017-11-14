@@ -1,0 +1,9 @@
+CREATE TABLE Dept_age
+	(Sdept CHAR(15),
+	Avg_age SMALLINT);
+	
+INSERT
+INTO Dept_age(Sdept,Avg_age)
+SELECT Sdept,AVG(Sage)
+FROM Student
+GROUP BY Sdept;

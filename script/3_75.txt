@@ -1,0 +1,10 @@
+select * from sc;
+
+UPDATE SC
+SET Grade=0
+WHERE Sno IN
+	(SELECT Sno
+	FROM Student
+	WHERE Sdept='CS');
+	
+select * from sc;

@@ -1,0 +1,7 @@
+select * from student where Sno='201215121';
+
+UPDATE Student
+SET Sage=22
+WHERE Sno='201215121';
+
+select * from student where Sno='201215121';

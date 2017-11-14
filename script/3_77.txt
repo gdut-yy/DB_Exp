@@ -1,0 +1,6 @@
+select * from sc;
+
+DELETE 
+FROM SC;
+
+select * from sc;
