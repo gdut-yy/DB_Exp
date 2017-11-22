@@ -1,0 +1,7 @@
+select * from student;
+
+UPDATE Student
+SET Sdept = NULL
+WHERE Sno='201215200';
+
+select * from student;

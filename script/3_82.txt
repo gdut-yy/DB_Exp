@@ -1,0 +1,3 @@
+SELECT Sno
+FROM SC
+WHERE Grade<60 AND Cno='1';

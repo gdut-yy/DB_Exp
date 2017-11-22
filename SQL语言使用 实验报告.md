@@ -244,6 +244,7 @@
 ![3.20](images\3.20.1.png)    
 
 用户可以通过指定别名来改变查询结果的列标题，这对于含算术表达式、常量、函数名的目标列表达式尤为有用。       
+
 ![3.20](images\3.20.2.png)       
 
 ----
@@ -252,6 +253,7 @@
 ![3.21](images\3.21.2.png)    
 
 该查询结果里包含了许多重复的行。如想去掉结果表中的重复行，必须指定DISTINCT：         
+
 ![3.21](images\3.21.2.png)    
 
 【3.22】查询计算机科学系全体学生的名单。    
@@ -533,8 +535,9 @@ FROM Student LEFT OUTER JOIN SC ON (Student.Sno=SC.Sno);
 解决方法：      
 本例也可以表示为：    
 
-	SELECT Sno FROM SC WHERE Cno='1' AND Sno IN(SELECT Sno FROM SC WHERE Cno='2');   
-运行结果： 
+	SELECT Sno FROM SC WHERE Cno='1' AND Sno IN(SELECT Sno FROM SC WHERE Cno='2');    
+
+运行结果：     
 ![3.67](images\3.67.2.png)     
 
 【3.68】查询计算机科学系的学生与年龄不大于19岁的学生的差集。    
@@ -824,7 +827,23 @@ FROM Student LEFT OUTER JOIN SC ON (Student.Sno=SC.Sno);
 
 ##实验总结
 
-书上所说的SQL语句和实际操作的mysql语句还是有一定差别的。例如MySql中没有交操作intersect，差操作except。此外在实验过程中还遇到了如语法错误，外键问题，表重定义问题。
+书上所说的SQL语句和实际操作的mysql语句还是有一定差别的。例如MySql中没有交操作INTERSECT，差操作EXCEPT。此外在实验过程中还遇到了如语法错误，外键问题，表重定义问题。    
+
+出BUG的例子：   
+【3.1】原因：MySQL创建模式  
+【3.2】原因：MySQL创建模式   
+【3.3】原因：MySQL创建模式  
+【3.4】原因：MySQL创建模式   
+【3.9】原因：MySQL修改数据类型语法 
+【3.14】原因：MySQL修改索引语法   
+【3.15】原因：MySQL删除索引语法    
+【3.34】原因：MySQL的字符转义   
+【3.35】原因：MySQL的字符转义   
+【3.66】原因：MySQL不支持INTERSECT交集      
+【3.67】原因：MySQL不支持INTERSECT交集    
+【3.68】原因：MySQL不支持EXCEPT差集    
+
+
 
 
 

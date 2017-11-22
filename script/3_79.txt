@@ -1,0 +1,6 @@
+select * from sc;
+
+INSERT INTO SC(Sno,Cno,Grade)
+	VALUES('201215126','1',NULL);
+	
+select * from sc;

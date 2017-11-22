@@ -1,0 +1,5 @@
+DELETE
+FROM IS_Student
+WHERE Sno='201215129';
+
+select * from student;

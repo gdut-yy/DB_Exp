@@ -1,0 +1,94 @@
+#####################################################
+
+#书本第四章实验脚本
+#POWERED BY 3115005124
+
+
+# 首先建立u1-u7的用户
+create user 'U1'@'localhost' identified by '1234';
+create user 'U2'@'localhost' identified by '1234';
+create user 'U3'@'localhost' identified by '1234';
+create user 'U4'@'localhost' identified by '1234';
+create user 'U5'@'localhost' identified by '1234';
+create user 'U6'@'localhost' identified by '1234';
+create user 'U7'@'localhost' identified by '1234';
+
+# 4.1 把查询Student表的权限授给用户U1。
+GRANT SELECT 
+ON TABLE Student 
+TO 'U1'@'localhost';
+
+# 4.2 把对Student表和Course表的全部操作权限授予用户U2和U3。   
+GRANT ALL PRIVILEGES
+ON TABLE Student,Course
+TO 'U2'@'localhost',
+'U3'@'localhost';
+
+GRANT ALL PRIVILEGES
+ON TABLE Student
+TO 'U2'@'localhost',
+'U3'@'localhost';
+
+GRANT ALL PRIVILEGES
+ON TABLE Course
+TO 'U2'@'localhost',
+'U3'@'localhost';
+
+# 4.3 把对表SC的查询权限授予所有用户。    
+GRANT SELECT 
+ON TABLE SC 
+TO PUBLIC;
+
+# 4.4 把查询Student表和修改学生学号的权限授给用户U4。     
+GRANT UPDATE(Sno),SELECT
+ON TABLE Student 
+TO 'U4'@'localhost';
+
+# 4.5 把对表SC的INSERT权限授予U5用户，并允许将此权限再授予其他用户。    
+GRANT INSERT 
+ON TABLE SC 
+TO 'U5'@'localhost'
+WITH GRANT OPTION;
+
+# 4.6 
+GRANT INSERT
+ON TABLE SC 
+TO 'U6'@'localhost'
+WITH GRANT OPTION;
+
+# 4.7
+GRANT INSERT 
+ON TABLE SC 
+TO 'U7'@'localhost';
+
+---------
+
+# 4.8 把用户U4修改学生学号的权限收回。    
+REVOKE UPDATE(Sno)
+ON TABLE Student
+FROM 'U4'@'localhost';
+
+# 4.9 收回所有用户对表SC的查询权限。    
+REVOKE SELECT
+ON TABLE SC
+FROM PUBLIC;
+
+# 4.10 把用户U5对SC表的INSERT权限收回。    
+REVOKE INSERT
+ON TABLE SC
+FROM 'U5'@'localhost' CASCADE;
+
+# 4.14 建立计算机系学生的视图，把对该视图的SELECT权限授予王平，把该视图上单所有操作权限授予张明。    
+CREATE VIEW CS_Student
+AS
+SELECT * 
+FROM Student
+WHERE Sdept='CS';
+
+GRANT SELECT
+ON CS_Student
+TO 'U7'@'localhost';
+
+GRANT ALL PRIVILEGES
+ON CS_Student
+TO 'U6'@'localhost';

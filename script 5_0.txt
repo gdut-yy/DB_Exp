@@ -1,0 +1,106 @@
+#####################################################
+
+#书本第五章实验脚本
+#POWERED BY 3115005124
+
+# 5.1 将Student表中的Sno属性定义为码。
+CREATE TABLE Student
+	(Sno CHAR(9) PRIMARY KEY,
+	Sname CHAR(20) NOT NULL,
+	Ssex CHAR(2),
+	Sage SMALLINT,
+	Sdept CHAR(20)
+	);
+	
+# 5.2 将SC表中的Sno、Cno属性组定义为码。
+CREATE TABLE SC
+	(Sno CHAR(9) NOT NULL,
+	Cno CHAR(4) NOT NULL,
+	Grade SMALLINT,
+	PRIMARY KEY(Sno,Cno)
+	);
+	
+# 5.3 定义SC表中的参照完整性。
+CREATE TABLE course(
+	Cno CHAR(4) PRIMARY KEY,
+	Cname CHAR(40) NOT NULL,
+	Cpno CHAR(4),
+	Ccredit SMALLINT
+);
+
+CREATE TABLE SC
+	(Sno CHAR(9) NOT NULL,
+	Cno CHAR(4) NOT NULL,
+	Grade SMALLINT,
+	PRIMARY KEY(Sno,Cno),
+	FOREIGN KEY(Sno) REFERENCES Student(Sno),
+	FOREIGN KEY(Cno) REFERENCES Course(Cno)
+	);
+	
+# 5.4 显式说明参照完整性的违约处理示例。
+CREATE TABLE SC
+	(Sno CHAR(9) NOT NULL,
+	Cno CHAR(4) NOT NULL,
+	Grade SMALLINT,
+	PRIMARY KEY(Sno,Cno),
+	FOREIGN KEY(Sno) REFERENCES Student(Sno)
+		ON DELETE CASCADE
+		
+		ON UPDATE CASCADE,
+	FOREIGN KEY(Cno) REFERENCES Course(Cno)
+		ON DELETE NO ACTION
+		
+		ON UPDATE CASCADE
+	);
+	
+# 5.5 在定义SC表时，说明Sno、Cno、Grade属性不允许取空值。
+CREATE TABLE SC
+	(Sno CHAR(9) NOT NULL,
+	Cno CHAR(4) NOT NULL,
+	Grade SMALLINT NOT NULL,
+	PRIMARY KEY(Sno,Cno)
+	);
+	
+# 5.6 建立部门表DEPT，要求部门名称Dname列取值唯一，部门编号Deptno列为主码。
+CREATE TABLE DEPT
+	(Deptno NUMERIC(2),
+	Dname CHAR(9) UNIQUE NOT NULL,
+	Location CHAR(10),
+	PRIMARY KEY(Deptno)
+	);
+	
+# 5.7 Student表的Ssex只允许取“男”或“女”。
+CREATE TABLE Student
+	(Sno CHAR(9) PRIMARY KEY,
+	Sname CHAR(8) NOT NULL,
+	Ssex CHAR(2) CHECK (Ssex IN('男','女')),
+	
+	Sage SMALLINT,
+	Sdept CHAR(20)
+	);
+
+# 5.8 SC表的Grade的值应该在0和100之间。
+CREATE TABLE SC
+	(Sno CHAR(9),
+	Cno CHAR(4),
+	Grade SMALLINT CHECK (Grade>=0 AND Grade<=100),
+	PRIMARY KEY(Sno,Cno),
+	FOREIGN KEY(Sno) REFERENCES Student(Sno),
+	FOREIGN KEY(Cno) REFERENCES Course(Cno)
+	);
+	
+# 5.9 当学生的性别是男时，其名字不能以Mr.s打头。
+CREATE TABLE Student
+	(Sno CHAR(9),
+	Sname CHAR(8) NOT NULL,
+	Ssex CHAR(2),	
+	Sage SMALLINT,
+	Sdept CHAR(20),
+	PRIMARY KEY(Sno),
+	CHECK(Ssex='女' OR Sname NOT LIKE 'Mr.%')
+	);
+	
+##########################################
+# 完整性约束命名子句
+
+# 5.10 

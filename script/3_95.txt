@@ -1,0 +1,5 @@
+UPDATE IS_Student
+SET Sname='刘辰'
+WHERE Sno='201215122';
+
+select * from student;

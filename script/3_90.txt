@@ -1,0 +1,7 @@
+CREATE VIEW F_Student(F_sno,name,sex,age,dept,ent)
+AS
+SELECT *
+FROM Student
+WHERE Ssex='女';
+
+select * from F_Student;

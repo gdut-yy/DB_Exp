@@ -1,0 +1,8 @@
+CREATE VIEW IS_Student
+AS
+SELECT Sno,Sname,Sage
+FROM Student
+WHERE Sdept='IS'
+WITH CHECK OPTION;
+
+select * from IS_Student;

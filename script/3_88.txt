@@ -1,0 +1,6 @@
+CREATE VIEW BT_S(Sno,Sname,Sbirth)
+AS
+SELECT Sno,Sname,2014-Sage
+FROM Student;
+
+select * from BT_S;

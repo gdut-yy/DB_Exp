@@ -1,0 +1,5 @@
+INSERT
+INTO IS_Student
+VALUES('201215129','赵新',20);
+
+select * from student;

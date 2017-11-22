@@ -1,0 +1,3 @@
+SELECT *
+FROM Student
+WHERE Sname IS NULL OR Ssex IS NULL OR Sage IS NULL OR Sdept IS NULL;

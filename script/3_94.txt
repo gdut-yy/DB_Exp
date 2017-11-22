@@ -1,0 +1,3 @@
+SELECT *
+FROM S_G
+WHERE Gavg>=90;
