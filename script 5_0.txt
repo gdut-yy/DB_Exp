@@ -179,7 +179,7 @@ CREATE ASSERTION ASSE_SC_DB_CNUM2
 # 触发器
 
 # 5.21 当对表SC的Grade属性进行修改时，若分数增加了10%，则将此次操作记录到另一个表SC_U(Sno、Cno、Oldgrade、Newgrade)中，其中 Oldgrade是修改前的分数，Newgrade是修改后的分数。
-
+delimiter |
 CREATE TRIGGER SC_T
 AFTER UPDATE OF Grade ON SC
 REFERENCING
@@ -188,7 +188,8 @@ REFERENCING
 FOR EACH ROW
 WHEN(NewTuple.Grade>=1.1*OLDROW.Grade)
 	INSERT INTO SC_U(Sno,Cno,OldGrade,NewGrade)
-	VALUE(OldTuple.Sno,OldTuple.Cno,OldTuple.Grade,NewTuple.Grade)
+	VALUE(OldTuple.Sno,OldTuple.Cno,OldTuple.Grade,NewTuple.Grade);
+delimiter ;
 	
 # 5.22 将每次对表Student的插入操作所增加的学生个数记录到表Student-InsertLog中。
 
@@ -198,8 +199,8 @@ REFERENCING
 	NEW TABLE AS DELTA
 	FOR EACH STATEMENT
 	
-		INSERT INTO StudentInsertLog(Numbers)
-		SELECT COUNT(*) FROM DELTA
+		INSERT INTO StudentInsertLog(Numbers);
+		SELECT COUNT(*) FROM DELTA;
 		
 # 5.23 定义一个BEFORE行级触发器，为教室表Teacher定义完整性规则“教授的工资不得低于4000元，如果低于4000元，自动改为4000元”。
 
@@ -214,3 +215,39 @@ BEGIN
 	END IF;
 END;
 
+#####################################################
+# mysql refman文档 触发器示例
+
+CREATE TABLE test1(a1 INT);
+CREATE TABLE test2(a2 INT);
+CREATE TABLE test3(a3 INT NOT NULL AUTO_INCREMENT PRIMARY KEY);
+CREATE TABLE test4(
+a4 INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+b4 INT DEFAULT 0
+);
+
+delimiter |
+CREATE TRIGGER testref BEFORE INSERT ON test1
+FOR EACH ROW
+BEGIN
+INSERT INTO test2 SET a2 = NEW.a1;
+DELETE FROM test3 WHERE a3 = NEW.a1;
+UPDATE test4 SET b4 = b4 + 1 WHERE a4 = NEW.a1;
+END;
+|
+delimiter ;
+
+INSERT INTO test3 (a3) VALUES
+(NULL), (NULL), (NULL), (NULL), (NULL),
+(NULL), (NULL), (NULL), (NULL), (NULL);
+
+INSERT INTO test4 (a4) VALUES
+(0), (0), (0), (0), (0), (0), (0), (0), (0), (0);
+
+INSERT INTO test1 VALUES
+(1), (3), (1), (7), (1), (8), (4), (4);
+
+SELECT * FROM test1;
+SELECT * FROM test2;
+SELECT * FROM test3;
+SELECT * FROM test4;
